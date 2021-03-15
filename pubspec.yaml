@@ -1,0 +1,15 @@
+name: cosmosdb
+description: CosmosDB SQL-API client for flutter
+version: 0.0.1
+author: Jonas Franz <jonas.franz@incloud.de>
+homepage: https://github.com/jonasfranz/cosmosdb
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  crypto: 3.0.0
+  http: 0.13.0
+dev_dependencies:
+  pedantic: ^1.10.0-nullsafety
+  test: ^1.16.0-nullsafety

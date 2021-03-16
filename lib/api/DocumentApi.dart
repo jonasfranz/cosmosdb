@@ -7,20 +7,19 @@ class DocumentApi {
 
   const DocumentApi(this._client);
 
-  Future<List<Map<String, dynamic>>> list(
-      String databaseId, String collectionId) async {
-    final result = await _client.get("dbs/$databaseId/colls/$collectionId/docs",
+  Future<Iterable<dynamic>> list(String databaseId, String collectionId) async {
+    final result = await _client.get('dbs/$databaseId/colls/$collectionId/docs',
         resourceType: ResourceType.item);
-    return result["Documents"];
+    return result['Documents'];
   }
 
-  Future<List<Map<String, dynamic>>> query(
+  Future<Iterable<dynamic>> query(
       Query query, String databaseId, String collectionId) async {
     final result = await _client.post(
-      "dbs/$databaseId/colls/$collectionId/docs",
+      'dbs/$databaseId/colls/$collectionId/docs',
       query.toMap(),
       resourceType: ResourceType.item,
     );
-    return result["Documents"];
+    return result['Documents'];
   }
 }

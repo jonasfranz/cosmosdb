@@ -9,28 +9,28 @@ class AuthTokenUtils {
 
   static String generateAuthToken(
       {required String signature,
-      String keyType = "master",
-      String tokenVersion = "1.0"}) {
+      String keyType = 'master',
+      String tokenVersion = '1.0'}) {
     return Uri.encodeComponent(
-        "type=${keyType}&ver=${tokenVersion}&sig=${signature}");
+        'type=$keyType&ver=$tokenVersion&sig=$signature');
   }
 
   static String generateAuthSignature(
-      {String verb = "",
+      {String verb = '',
       ResourceType resourceType = ResourceType.none,
-      String resourceLink = "",
+      String resourceLink = '',
       DateTime? date,
       required String key}) {
-    final DateTime dateOrNow = date ?? DateTime.now();
-    final String formattedDate = HttpDate.format(dateOrNow);
-    final String payload = [
+    final dateOrNow = date ?? DateTime.now();
+    final formattedDate = HttpDate.format(dateOrNow);
+    final payload = [
           verb.toLowerCase(),
           resourceType.key,
           resourceLink,
           formattedDate.toLowerCase(),
-          "",
-        ].join("\n") +
-        "\n";
+          '',
+        ].join('\n') +
+        '\n';
     final payloadAsBytes = utf8.encode(payload);
     final hmacSha256 = Hmac(sha256, base64Decode(key));
     final signature = hmacSha256.convert(payloadAsBytes);

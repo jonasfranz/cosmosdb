@@ -23,8 +23,8 @@ class CosmosDBHttpClient {
     Map<String, String> headers = const {},
   }) async {
     final date = DateTime.now().toUtc();
-    final request = new http.Request(method, Uri.parse(baseUrl + path));
-    final parts = path.split("/");
+    final request = http.Request(method, Uri.parse(baseUrl + path));
+    final parts = path.split('/');
     if (parts.length > 1) {
       parts.removeLast();
     }
@@ -32,7 +32,7 @@ class CosmosDBHttpClient {
       verb: method,
       key: masterKey,
       resourceType: resourceType,
-      resourceLink: parts.join("/"),
+      resourceLink: parts.join('/'),
       date: date,
     );
 
@@ -41,14 +41,15 @@ class CosmosDBHttpClient {
     }
 
     request.headers.addAll({
-      "x-ms-date": HttpDate.format(date),
-      "x-ms-version": "2018-12-31",
-      "authorization": AuthTokenUtils.generateAuthToken(signature: signature)
+      'x-ms-date': HttpDate.format(date),
+      'x-ms-version': '2018-12-31',
+      'authorization': AuthTokenUtils.generateAuthToken(signature: signature)
     });
     final result = await httpClient.send(request);
     final resultBody = jsonDecode(await result.stream.bytesToString());
-    if (result.statusCode ~/ 100 != 2)
-      throw Exception(resultBody["message"] ?? "Unknown Error");
+    if (result.statusCode ~/ 100 != 2) {
+      throw Exception(resultBody['message'] ?? 'Unknown Error');
+    }
     return resultBody;
   }
 
@@ -57,7 +58,7 @@ class CosmosDBHttpClient {
     ResourceType resourceType = ResourceType.none,
     Map<String, String> headers = const {},
   }) async {
-    return _executeRequest("get", path,
+    return _executeRequest('get', path,
         resourceType: resourceType, headers: headers);
   }
 
@@ -67,20 +68,19 @@ class CosmosDBHttpClient {
     ResourceType resourceType = ResourceType.none,
     Map<String, String> headers = const {},
   }) {
-    return _executeRequest("post", path,
+    return _executeRequest('post', path,
         resourceType: resourceType,
-        headers: headers..["Content-Type"] = "application/query+json");
+        headers: headers..['Content-Type'] = 'application/query+json');
   }
 
   Future<Map<String, dynamic>> put(
     String path,
     Object? body, {
     ResourceType resourceType = ResourceType.none,
-    String resourceId = "",
     Map<String, String> headers = const {},
   }) async {
-    return _executeRequest("put", path,
+    return _executeRequest('put', path,
         resourceType: resourceType,
-        headers: headers..["Content-Type"] = "application/query+json");
+        headers: headers..['Content-Type'] = 'application/query+json');
   }
 }

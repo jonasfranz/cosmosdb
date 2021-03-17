@@ -7,4 +7,6 @@ class TestConfig {
       'COSMOS_DB_MASTER_KEY',
       defaultValue:
           'C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==');
+  static const ignoreSelfSignedCertificates =
+      bool.fromEnvironment('COSMOS_DB_IGNORE_SSL', defaultValue: true);
 }

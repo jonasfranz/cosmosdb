@@ -6,14 +6,13 @@ import 'package:cosmosdb/utils/auth_token_utils.dart';
 import 'package:http/http.dart' as http;
 
 class CosmosDBHttpClient {
-  final http.Client httpClient = http.Client();
+  final http.Client httpClient;
   final String masterKey;
   final String baseUrl;
 
-  CosmosDBHttpClient({
-    required this.masterKey,
-    required this.baseUrl,
-  });
+  CosmosDBHttpClient(
+      {required this.masterKey, required this.baseUrl, http.Client? httpClient})
+      : httpClient = httpClient ?? http.Client();
 
   Future<Map<String, dynamic>> _executeRequest(
     String method,

@@ -2,7 +2,6 @@ import 'package:cosmosdb/cosmosdb.dart';
 import 'package:cosmosdb/model/database.dart';
 import 'package:test/test.dart';
 
-import 'test_config.dart';
 import 'utils.dart';
 
 void main() {
@@ -10,10 +9,7 @@ void main() {
     late CosmosDB cosmos;
     late String databaseId;
     setUp(() {
-      cosmos = CosmosDB(
-        masterKey: TestConfig.cosmosDBMasterKey,
-        baseUrl: TestConfig.cosmosDBUrl,
-      );
+      cosmos = buildClient();
       databaseId = generateDatabaseName();
       return cosmos.databases.create(Database(id: databaseId));
     });

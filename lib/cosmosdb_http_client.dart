@@ -18,6 +18,7 @@ class CosmosDBHttpClient {
   Future<Map<String, dynamic>> _executeRequest(
     String method,
     String path, {
+    required bool removeLastPart,
     Object? body,
     ResourceType resourceType = ResourceType.none,
     Map<String, String> headers = const {},
@@ -25,7 +26,7 @@ class CosmosDBHttpClient {
     final date = DateTime.now().toUtc();
     final request = http.Request(method, Uri.parse(baseUrl + path));
     final parts = path.split('/');
-    if (parts.length > 1) {
+    if (removeLastPart) {
       parts.removeLast();
     }
     final signature = AuthTokenUtils.generateAuthSignature(
@@ -46,7 +47,19 @@ class CosmosDBHttpClient {
       'authorization': AuthTokenUtils.generateAuthToken(signature: signature)
     });
     final result = await httpClient.send(request);
-    final resultBody = jsonDecode(await result.stream.bytesToString());
+    if (result.headers['content-type'] != 'application/json') {
+      throw Exception(
+          'invalid response: ' + await result.stream.bytesToString());
+    }
+    final resultString = await result.stream.bytesToString();
+    var resultBody = <String, dynamic>{};
+    try {
+      if (resultString.isNotEmpty) {
+        resultBody = jsonDecode(resultString);
+      }
+    } catch (err) {
+      throw Exception('cannot parse received body: $resultString');
+    }
     if (result.statusCode ~/ 100 != 2) {
       throw Exception(resultBody['message'] ?? 'Unknown Error');
     }
@@ -55,32 +68,65 @@ class CosmosDBHttpClient {
 
   Future<Map<String, dynamic>> get(
     String path, {
+    required bool removeLastPart,
     ResourceType resourceType = ResourceType.none,
     Map<String, String> headers = const {},
   }) async {
-    return _executeRequest('get', path,
-        resourceType: resourceType, headers: headers);
+    return _executeRequest(
+      'get',
+      path,
+      removeLastPart: removeLastPart,
+      resourceType: resourceType,
+      headers: headers,
+    );
+  }
+
+  Future<Map<String, dynamic>> delete(
+    String path, {
+    required bool removeLastPart,
+    ResourceType resourceType = ResourceType.none,
+    Map<String, String> headers = const {},
+  }) async {
+    return _executeRequest(
+      'delete',
+      path,
+      removeLastPart: removeLastPart,
+      resourceType: resourceType,
+      headers: headers,
+    );
   }
 
   Future<Map<String, dynamic>> post(
     String path,
     Object? body, {
+    required bool removeLastPart,
     ResourceType resourceType = ResourceType.none,
     Map<String, String> headers = const {},
   }) {
-    return _executeRequest('post', path,
-        resourceType: resourceType,
-        headers: headers..['Content-Type'] = 'application/query+json');
+    return _executeRequest(
+      'post',
+      path,
+      removeLastPart: removeLastPart,
+      body: body,
+      resourceType: resourceType,
+      headers: {'Content-Type': 'application/json', ...headers},
+    );
   }
 
   Future<Map<String, dynamic>> put(
     String path,
     Object? body, {
+    required bool removeLastPart,
     ResourceType resourceType = ResourceType.none,
     Map<String, String> headers = const {},
   }) async {
-    return _executeRequest('put', path,
-        resourceType: resourceType,
-        headers: headers..['Content-Type'] = 'application/query+json');
+    return _executeRequest(
+      'put',
+      path,
+      removeLastPart: removeLastPart,
+      body: body,
+      resourceType: resourceType,
+      headers: {'Content-Type': 'application/json', ...headers},
+    );
   }
 }

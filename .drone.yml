@@ -1,0 +1,15 @@
+kind: pipeline
+name: default
+type: docker
+
+platform:
+  os: windows
+  arch: amd64
+
+steps:
+  - name: test
+    image: google/dart
+    commands:
+      - dart pub get
+      - dart analyze --fatal-infos
+      - dart test -r expanded

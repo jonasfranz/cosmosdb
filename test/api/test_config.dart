@@ -2,7 +2,7 @@ class TestConfig {
   const TestConfig._();
 
   static const cosmosDBUrl = String.fromEnvironment('COSMOS_DB_URL',
-      defaultValue: 'https://localhost:8081');
+      defaultValue: 'https://localhost:8081/');
   static const cosmosDBMasterKey = String.fromEnvironment(
       'COSMOS_DB_MASTER_KEY',
       defaultValue:

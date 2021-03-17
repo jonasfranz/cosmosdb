@@ -1,6 +1,8 @@
 # cosmosdb
 
-CosmosDB SQL-API client for flutter
+[![codecov](https://codecov.io/gh/jonasfranz/cosmosdb/branch/master/graph/badge.svg?token=LLQQAP43A6)](https://codecov.io/gh/jonasfranz/cosmosdb)
+
+CosmosDB SQL-API client for Dart
 
 ## Getting Started
 

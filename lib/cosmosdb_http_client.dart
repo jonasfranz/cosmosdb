@@ -42,7 +42,7 @@ class CosmosDBHttpClient {
 
     request.headers.addAll({
       'x-ms-date': HttpDate.format(date),
-      'x-ms-version': '2018-12-31',
+      'x-ms-version': '2018-09-17',
       'authorization': AuthTokenUtils.generateAuthToken(signature: signature)
     });
     final result = await httpClient.send(request);

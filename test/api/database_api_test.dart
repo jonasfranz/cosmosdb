@@ -10,7 +10,10 @@ void main() {
     test('check if creating a database works', () async {
       final databaseId = generateDatabaseName();
       expect(
-          await cosmos.databases.create(Database(id: databaseId)), databaseId);
+          await cosmos.databases
+              .create(Database(id: databaseId))
+              .then((db) => db.id),
+          databaseId);
     });
   });
 }

@@ -20,5 +20,6 @@ jobs:
       - name: Run analyzer
         run: dart analyze --fatal-infos
 
+      - uses: southpolesteve/cosmos-emulator-github-action@v1
       - name: Run tests
         run: dart test -r expanded

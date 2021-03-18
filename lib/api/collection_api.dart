@@ -26,10 +26,10 @@ class CollectionApi {
 
   Future<void> create(String databaseId, String collectionId) {
     return _client.post(
-      'dbs/$databaseId',
+      'dbs/$databaseId/colls',
       {'id': collectionId},
       resourceType: ResourceType.container,
-      removeLastPart: false,
+      removeLastPart: true,
     );
   }
 

@@ -25,7 +25,8 @@ void main() {
     test('check if findById works', () async {
       final collectionId = generateId();
       await cosmos.collections.create(databaseId, collectionId);
-      final result = cosmos.collections.findById(databaseId, collectionId);
+      final result =
+          await cosmos.collections.findById(databaseId, collectionId);
       expect(result, collectionId);
     });
 
@@ -40,7 +41,7 @@ void main() {
     test('check if list works', () async {
       final collectionId = generateId();
       await cosmos.collections.create(databaseId, collectionId);
-      final results = cosmos.collections.list(databaseId);
+      final results = await cosmos.collections.list(databaseId);
       expect(results, contains(collectionId));
     });
   });

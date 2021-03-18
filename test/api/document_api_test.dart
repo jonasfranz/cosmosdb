@@ -5,12 +5,12 @@ import 'package:test/test.dart';
 import 'utils.dart';
 
 void main() {
-  group('documents api test', () {
+  group('document api test', () {
     late CosmosDB cosmos;
     late String databaseId;
     setUp(() {
       cosmos = buildClient();
-      databaseId = generateDatabaseName();
+      databaseId = generateId();
       return cosmos.databases.create(Database(id: databaseId));
     });
     tearDown(() async {

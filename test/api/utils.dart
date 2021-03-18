@@ -7,7 +7,7 @@ import 'package:http/io_client.dart';
 
 import 'test_config.dart';
 
-String generateDatabaseName() {
+String generateId() {
   final random = Random();
   var values = List<int>.generate(32, (i) => random.nextInt(256));
   return md5.convert(values).toString();

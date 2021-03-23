@@ -6,7 +6,9 @@ import 'package:cosmosdb/api/document_api.dart';
 import 'package:cosmosdb/cosmosdb_http_client.dart';
 import 'package:http/http.dart';
 
+export 'model/database.dart';
 export 'model/query.dart';
+export 'model/request_options.dart';
 
 class CosmosDB {
   final CosmosDBHttpClient _client;

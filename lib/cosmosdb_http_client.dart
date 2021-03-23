@@ -39,7 +39,7 @@ class CosmosDBHttpClient {
     if (body != null) {
       request.body = jsonEncode(body);
     }
-
+    request.headers.addAll(headers);
     request.headers.addAll({
       'x-ms-date': HttpDate.format(date),
       'x-ms-version': '2018-09-17',

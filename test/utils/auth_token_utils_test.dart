@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:cosmosdb/model/resource_type.dart';
-import 'package:cosmosdb/utils/auth_token_utils.dart';
+import 'package:cosmosdb/src/model/resource_type.dart';
+import 'package:cosmosdb/src/utils/auth_token_utils.dart';
 import 'package:test/test.dart';
 
 void main() {

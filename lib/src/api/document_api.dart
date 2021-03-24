@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:cosmosdb/cosmosdb_http_client.dart';
 import 'package:cosmosdb/model/query.dart';
 import 'package:cosmosdb/model/request_options.dart';
-import 'package:cosmosdb/model/resource_type.dart';
+import 'package:cosmosdb/src/cosmosdb_http_client.dart';
+import 'package:cosmosdb/src/model/resource_type.dart';
 
 /// Access documents in cosmosdb collections
 class DocumentApi {

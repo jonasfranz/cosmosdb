@@ -1,5 +1,5 @@
 name: cosmosdb
-description: API client to interact with the CosmosDB SQL-API in Dart
+description: API client to interact with the CosmosDB SQL-API by its REST API in Dart
 version: 0.0.2-prerelease
 repository: https://github.com/jonasfranz/cosmosdb
 

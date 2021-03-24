@@ -65,11 +65,11 @@ class CollectionApi {
       {CosmosRequestOptions? options}) {
     return _client
         .get(
-      'dbs/$databaseId/colls/$collectionId',
-      resourceType: ResourceType.container,
-      removeLastPart: false,
-      headers: options?.toHeaders() ?? const {},
-    )
+          'dbs/$databaseId/colls/$collectionId',
+          resourceType: ResourceType.container,
+          removeLastPart: false,
+          headers: options?.toHeaders() ?? const {},
+        )
         .then((collection) => collection['id']);
   }
 }

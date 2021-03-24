@@ -40,7 +40,7 @@ void main() {
       final collectionId = generateId();
       await cosmos.collections.create(databaseId, collectionId);
       final result =
-      await cosmos.collections.findById(databaseId, collectionId);
+          await cosmos.collections.findById(databaseId, collectionId);
       expect(result, collectionId);
     });
 

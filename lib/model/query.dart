@@ -25,8 +25,8 @@ class Query {
 
   /// Converts query to cosmosdb compatible map
   Map<String, dynamic> toMap() => {
-    'query': query,
-    'parameters': parameters.entries.map((param) => {
+        'query': query,
+        'parameters': parameters.entries.map((param) => {
               'name': param.key,
               'value': param.value,
             })

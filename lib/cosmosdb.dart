@@ -40,5 +40,5 @@ class CosmosDB {
   /// Configures the APIs with the credentials and a custom but optional http client
   CosmosDB({required masterKey, required baseUrl, Client? httpClient})
       : _client = CosmosDBHttpClient(
-      masterKey: masterKey, baseUrl: baseUrl, httpClient: httpClient);
+            masterKey: masterKey, baseUrl: baseUrl, httpClient: httpClient);
 }

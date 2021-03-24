@@ -34,13 +34,14 @@ class CosmosDBHttpClient {
         _masterKey = masterKey,
         _baseUrl = baseUrl;
 
-  Future<Map<String, dynamic>> _executeRequest(String method,
-      String path, {
-        required bool removeLastPart,
-        Object? body,
-        ResourceType resourceType = ResourceType.none,
-        Map<String, String> headers = const {},
-      }) async {
+  Future<Map<String, dynamic>> _executeRequest(
+    String method,
+    String path, {
+    required bool removeLastPart,
+    Object? body,
+    ResourceType resourceType = ResourceType.none,
+    Map<String, String> headers = const {},
+  }) async {
     final date = DateTime.now().toUtc();
     final request = http.Request(method, Uri.parse(_baseUrl + path));
     final parts = path.split('/');
@@ -85,7 +86,8 @@ class CosmosDBHttpClient {
   }
 
   /// Executes a GET request
-  Future<Map<String, dynamic>> get(String path, {
+  Future<Map<String, dynamic>> get(
+    String path, {
     required bool removeLastPart,
     ResourceType resourceType = ResourceType.none,
     Map<String, String> headers = const {},
@@ -100,7 +102,8 @@ class CosmosDBHttpClient {
   }
 
   /// Executes a DELETE request
-  Future<Map<String, dynamic>> delete(String path, {
+  Future<Map<String, dynamic>> delete(
+    String path, {
     required bool removeLastPart,
     ResourceType resourceType = ResourceType.none,
     Map<String, String> headers = const {},
@@ -115,12 +118,13 @@ class CosmosDBHttpClient {
   }
 
   /// Executes a POST request
-  Future<Map<String, dynamic>> post(String path,
-      Object? body, {
-        required bool removeLastPart,
-        ResourceType resourceType = ResourceType.none,
-        Map<String, String> headers = const {},
-      }) {
+  Future<Map<String, dynamic>> post(
+    String path,
+    Object? body, {
+    required bool removeLastPart,
+    ResourceType resourceType = ResourceType.none,
+    Map<String, String> headers = const {},
+  }) {
     return _executeRequest(
       'post',
       path,
@@ -132,12 +136,13 @@ class CosmosDBHttpClient {
   }
 
   /// Executes a PUT request
-  Future<Map<String, dynamic>> put(String path,
-      Object? body, {
-        required bool removeLastPart,
-        ResourceType resourceType = ResourceType.none,
-        Map<String, String> headers = const {},
-      }) async {
+  Future<Map<String, dynamic>> put(
+    String path,
+    Object? body, {
+    required bool removeLastPart,
+    ResourceType resourceType = ResourceType.none,
+    Map<String, String> headers = const {},
+  }) async {
     return _executeRequest(
       'put',
       path,

@@ -50,12 +50,12 @@ class DatabaseApi {
   Future<Database> create(Database database, {CosmosRequestOptions? options}) {
     return _client
         .post(
-      'dbs',
-      database.toMap(),
-      resourceType: ResourceType.database,
-      removeLastPart: true,
-      headers: options?.toHeaders() ?? const {},
-    )
+          'dbs',
+          database.toMap(),
+          resourceType: ResourceType.database,
+          removeLastPart: true,
+          headers: options?.toHeaders() ?? const {},
+        )
         .then(_databaseFromMap);
   }
 
@@ -65,11 +65,11 @@ class DatabaseApi {
       {CosmosRequestOptions? options}) {
     return _client
         .get(
-      'dbs/$databaseId',
-      resourceType: ResourceType.database,
-      removeLastPart: false,
-      headers: options?.toHeaders() ?? const {},
-    )
+          'dbs/$databaseId',
+          resourceType: ResourceType.database,
+          removeLastPart: false,
+          headers: options?.toHeaders() ?? const {},
+        )
         .then(_databaseFromMap);
   }
 

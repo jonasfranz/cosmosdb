@@ -37,7 +37,8 @@ class DocumentApi {
   }
 
   /// Executes the query in the given collection
-  Future<Iterable<dynamic>> query(Query query, String databaseId, String collectionId,
+  Future<Iterable<dynamic>> query(
+      Query query, String databaseId, String collectionId,
       {CosmosRequestOptions? options}) async {
     final result = await _client.post(
       'dbs/$databaseId/colls/$collectionId/docs',
@@ -74,7 +75,8 @@ class DocumentApi {
   }
 
   /// Returns the document with the given id in the collection
-  Future<Map<String, dynamic>> findById(String databaseId, String collectionId, String documentId,
+  Future<Map<String, dynamic>> findById(
+      String databaseId, String collectionId, String documentId,
       {CosmosRequestOptions? options}) async {
     return await _client.get(
       'dbs/$databaseId/colls/$collectionId/docs/$documentId',

@@ -46,14 +46,14 @@ class CosmosRequestOptions {
 
   /// Generates HTTP headers for the given options
   Map<String, String> toHeaders() => {
-    if (partitionKeys != null)
-      'x-ms-documentdb-partitionkey': jsonEncode(partitionKeys),
-    if (maxItemCount != null)
-      'x-ms-max-item-count': maxItemCount.toString(),
-    if (enableCrossPartition != null)
-      'x-ms-documentdb-query-enablecrosspartition':
-      enableCrossPartition.toString(),
-    if (allowTentativeWrites != null)
-      'x-ms-cosmos-allow-tentative-writes': allowTentativeWrites.toString(),
-  };
+        if (partitionKeys != null)
+          'x-ms-documentdb-partitionkey': jsonEncode(partitionKeys),
+        if (maxItemCount != null)
+          'x-ms-max-item-count': maxItemCount.toString(),
+        if (enableCrossPartition != null)
+          'x-ms-documentdb-query-enablecrosspartition':
+              enableCrossPartition.toString(),
+        if (allowTentativeWrites != null)
+          'x-ms-cosmos-allow-tentative-writes': allowTentativeWrites.toString(),
+      };
 }

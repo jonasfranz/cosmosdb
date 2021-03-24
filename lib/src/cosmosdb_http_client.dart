@@ -14,8 +14,8 @@
 
 import 'dart:convert';
 
-import 'package:cosmosdb/model/resource_type.dart';
-import 'package:cosmosdb/utils/auth_token_utils.dart';
+import 'package:cosmosdb/src/model/resource_type.dart';
+import 'package:cosmosdb/src/utils/auth_token_utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:universal_io/io.dart';
 

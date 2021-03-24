@@ -14,10 +14,10 @@
 
 library cosmosdb;
 
-import 'package:cosmosdb/api/collection_api.dart';
-import 'package:cosmosdb/api/database_api.dart';
-import 'package:cosmosdb/api/document_api.dart';
-import 'package:cosmosdb/cosmosdb_http_client.dart';
+import 'package:cosmosdb/src/api/collection_api.dart';
+import 'package:cosmosdb/src/api/database_api.dart';
+import 'package:cosmosdb/src/api/document_api.dart';
+import 'package:cosmosdb/src/cosmosdb_http_client.dart';
 import 'package:http/http.dart';
 
 export 'model/database.dart';

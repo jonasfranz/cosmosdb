@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:io';
 import 'dart:math';
 
 import 'package:cosmosdb/cosmosdb.dart';
 import 'package:crypto/crypto.dart';
 import 'package:http/io_client.dart';
+import 'package:universal_io/io.dart';
 
 import 'test_config.dart';
 

@@ -13,10 +13,10 @@
 // limitations under the License.
 
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:cosmosdb/model/resource_type.dart';
+import 'package:cosmosdb/src/model/resource_type.dart';
 import 'package:crypto/crypto.dart';
+import 'package:universal_io/io.dart';
 
 /// Utils to generate cryptographic keys
 class AuthTokenUtils {

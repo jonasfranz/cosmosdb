@@ -1,3 +1,6 @@
+// Internal use only
+// ignore_for_file: public_member_api_docs
+
 enum ResourceType {
   none,
   database,
@@ -28,6 +31,7 @@ extension ResourceTypeKeys on ResourceType {
     ResourceType.item: 'docs',
     ResourceType.pkranges: 'pkranges'
   };
+
   String get key {
     return _keys[this] ?? 'none';
   }

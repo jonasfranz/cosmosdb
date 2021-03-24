@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:cosmosdb/model/resource_type.dart';
 import 'package:crypto/crypto.dart';
 
+/// Utils to generate cryptographic keys
 class AuthTokenUtils {
   const AuthTokenUtils._();
 
+  /// Generate the auth token by url encoding the components
   static String generateAuthToken(
       {required String signature,
       String keyType = 'master',
@@ -15,6 +17,7 @@ class AuthTokenUtils {
         'type=$keyType&ver=$tokenVersion&sig=$signature');
   }
 
+  /// Generates an authentication signature specified by cosmosdb
   static String generateAuthSignature(
       {String verb = '',
       ResourceType resourceType = ResourceType.none,

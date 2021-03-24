@@ -1,18 +1,24 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:cosmosdb/model/resource_type.dart';
 import 'package:cosmosdb/utils/auth_token_utils.dart';
 import 'package:http/http.dart' as http;
+import 'package:universal_io/io.dart';
 
+/// An abstraction for the http client to handle common operations
 class CosmosDBHttpClient {
-  final http.Client httpClient;
-  final String masterKey;
-  final String baseUrl;
+  final http.Client _httpClient;
+  final String _masterKey;
+  final String _baseUrl;
 
-  CosmosDBHttpClient(
-      {required this.masterKey, required this.baseUrl, http.Client? httpClient})
-      : httpClient = httpClient ?? http.Client();
+  /// Configures the HTTP client to use the given configuration
+  CosmosDBHttpClient({
+    required String masterKey,
+    required String baseUrl,
+    http.Client? httpClient,
+  })  : _httpClient = httpClient ?? http.Client(),
+        _masterKey = masterKey,
+        _baseUrl = baseUrl;
 
   Future<Map<String, dynamic>> _executeRequest(
     String method,
@@ -23,14 +29,14 @@ class CosmosDBHttpClient {
     Map<String, String> headers = const {},
   }) async {
     final date = DateTime.now().toUtc();
-    final request = http.Request(method, Uri.parse(baseUrl + path));
+    final request = http.Request(method, Uri.parse(_baseUrl + path));
     final parts = path.split('/');
     if (removeLastPart) {
       parts.removeLast();
     }
     final signature = AuthTokenUtils.generateAuthSignature(
       verb: method,
-      key: masterKey,
+      key: _masterKey,
       resourceType: resourceType,
       resourceLink: parts.join('/'),
       date: date,
@@ -45,7 +51,7 @@ class CosmosDBHttpClient {
       'x-ms-version': '2018-09-17',
       'authorization': AuthTokenUtils.generateAuthToken(signature: signature)
     });
-    final result = await httpClient.send(request);
+    final result = await _httpClient.send(request);
     if (result.headers['content-type'] != 'application/json') {
       throw Exception(
           'invalid response: ' + await result.stream.bytesToString());
@@ -65,6 +71,7 @@ class CosmosDBHttpClient {
     return resultBody;
   }
 
+  /// Executes a GET request
   Future<Map<String, dynamic>> get(
     String path, {
     required bool removeLastPart,
@@ -80,6 +87,7 @@ class CosmosDBHttpClient {
     );
   }
 
+  /// Executes a DELETE request
   Future<Map<String, dynamic>> delete(
     String path, {
     required bool removeLastPart,
@@ -95,6 +103,7 @@ class CosmosDBHttpClient {
     );
   }
 
+  /// Executes a POST request
   Future<Map<String, dynamic>> post(
     String path,
     Object? body, {
@@ -112,6 +121,7 @@ class CosmosDBHttpClient {
     );
   }
 
+  /// Executes a PUT request
   Future<Map<String, dynamic>> put(
     String path,
     Object? body, {

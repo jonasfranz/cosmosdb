@@ -3,11 +3,14 @@ import 'package:cosmosdb/model/query.dart';
 import 'package:cosmosdb/model/request_options.dart';
 import 'package:cosmosdb/model/resource_type.dart';
 
+/// Access documents in cosmosdb collections
 class DocumentApi {
   final CosmosDBHttpClient _client;
 
+  /// Initializes the api with the http client
   const DocumentApi(this._client);
 
+  /// Lists all documents in the given collection
   Future<Iterable<dynamic>> list(String databaseId, String collectionId,
       {CosmosRequestOptions? options}) async {
     final result = await _client.get(
@@ -19,6 +22,7 @@ class DocumentApi {
     return result['Documents'];
   }
 
+  /// Executes the query in the given collection
   Future<Iterable<dynamic>> query(
       Query query, String databaseId, String collectionId,
       {CosmosRequestOptions? options}) async {
@@ -32,6 +36,7 @@ class DocumentApi {
     return result['Documents'];
   }
 
+  /// Replaces the document with the given id with newDocument
   Future<Map<String, dynamic>> replace(Map<String, dynamic> newDocument,
       String databaseId, String collectionId, String documentId,
       {CosmosRequestOptions? options}) {
@@ -44,6 +49,7 @@ class DocumentApi {
     );
   }
 
+  /// Deletes the document with the given id in the collection
   Future<void> delete(String databaseId, String collectionId, String documentId,
       {CosmosRequestOptions? options}) async {
     await _client.delete(
@@ -54,6 +60,7 @@ class DocumentApi {
     );
   }
 
+  /// Returns the document with the given id in the collection
   Future<Map<String, dynamic>> findById(
       String databaseId, String collectionId, String documentId,
       {CosmosRequestOptions? options}) async {

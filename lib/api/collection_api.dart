@@ -2,11 +2,14 @@ import 'package:cosmosdb/cosmosdb_http_client.dart';
 import 'package:cosmosdb/model/request_options.dart';
 import 'package:cosmosdb/model/resource_type.dart';
 
+/// Provides access to collection in a cosmosdb database
 class CollectionApi {
   final CosmosDBHttpClient _client;
 
+  /// Initializes the api with the http client
   const CollectionApi(this._client);
 
+  /// Lists all collections in the given database
   Future<Iterable<String>> list(String databaseId,
       {CosmosRequestOptions? options}) async {
     final results = await _client.get(
@@ -19,6 +22,7 @@ class CollectionApi {
     return collections.map((collection) => collection['id']);
   }
 
+  /// Deletes the collection with the given id in the given database
   Future<void> delete(String databaseId, String collectionId,
       {CosmosRequestOptions? options}) {
     return _client.delete(
@@ -29,6 +33,7 @@ class CollectionApi {
     );
   }
 
+  /// Creates a new collection in the given database
   Future<void> create(String databaseId, String collectionId,
       {CosmosRequestOptions? options}) {
     return _client.post(
@@ -40,6 +45,8 @@ class CollectionApi {
     );
   }
 
+  /// Returns the collection id with the given collection id.
+  /// Will throw an exception in case it does not exist at the given database.
   Future<String> findById(String databaseId, String collectionId,
       {CosmosRequestOptions? options}) {
     return _client

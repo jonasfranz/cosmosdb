@@ -35,7 +35,7 @@ void main() {
       final databaseId = generateId();
       await cosmos.databases.create(Database(id: databaseId));
       final dbs = await cosmos.databases.list();
-      expect(dbs.toList()[0].id, databaseId);
+      expect(dbs.toList().any((db) => db.id == databaseId), true);
       await cosmos.databases.delete(databaseId);
     });
 

@@ -18,7 +18,7 @@ class Query {
   final String query;
 
   /// Parameters of the query
-  final Map<String, String> parameters;
+  final Map<String, dynamic> parameters;
 
   /// Creates a new SQL query with optional parameters
   const Query({required this.query, this.parameters = const {}});
@@ -26,9 +26,11 @@ class Query {
   /// Converts query to cosmosdb compatible map
   Map<String, dynamic> toMap() => {
         'query': query,
-        'parameters': parameters.entries.map((param) => {
-              'name': param.key,
-              'value': param.value,
-            })
+        'parameters': parameters.entries
+            .map((param) => {
+                  'name': '@' + param.key,
+                  'value': param.value,
+                })
+            .toList()
       };
 }

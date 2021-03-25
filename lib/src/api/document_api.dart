@@ -40,12 +40,14 @@ class DocumentApi {
   Future<Iterable<dynamic>> query(
       Query query, String databaseId, String collectionId,
       {CosmosRequestOptions? options}) async {
+    final body = query.toMap();
     final result = await _client.post(
       'dbs/$databaseId/colls/$collectionId/docs',
-      query.toMap(),
+      body,
       resourceType: ResourceType.item,
       removeLastPart: true,
-      headers: options?.toHeaders() ?? const {},
+      headers: (options?.toHeaders() ?? {})
+        ..addAll({'Content-Type': 'application/query+json'}),
     );
     return result['Documents'];
   }
@@ -83,6 +85,26 @@ class DocumentApi {
       resourceType: ResourceType.item,
       removeLastPart: false,
       headers: options?.toHeaders() ?? const {},
+    );
+  }
+
+  /// Creates a new document in the given collection
+  /// The document must include an attribute called 'id'
+  Future<Map<String, dynamic>> create(
+    String databaseId,
+    String collectionId,
+    Map<String, dynamic> document, {
+    CosmosRequestOptions? options,
+  }) async {
+    if (!document.containsKey('id')) {
+      throw ArgumentError('id in document is required');
+    }
+    return await _client.post(
+      'dbs/$databaseId/colls/$collectionId/docs',
+      document,
+      removeLastPart: true,
+      resourceType: ResourceType.item,
+      headers: options?.toHeaders() ?? {},
     );
   }
 }

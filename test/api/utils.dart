@@ -33,14 +33,6 @@ CosmosDB buildClient() {
   if (config.ignoreSelfSignedCertificates) {
     client.badCertificateCallback = (_, __, ___) => true;
   }
-  print('CosmosDB buildClient()');
-  print(Platform.environment['COSMOS_DB_URL']);
-  print(Platform.environment['COSMOS_DB_MASTER_KEY']);
-  const urlIsDeclared = bool.hasEnvironment('COSMOS_DB_URL');
-  const url = String.fromEnvironment('COSMOS_DB_URL');
-  print('urlIsDeclared=$urlIsDeclared; url=$url');
-  print(config.cosmosDBUrl);
-  print(config.cosmosDBMasterKey);
   return CosmosDB(
     masterKey: config.cosmosDBMasterKey,
     baseUrl: config.cosmosDBUrl,

@@ -50,9 +50,16 @@ class CollectionApi {
   /// Creates a new collection in the given database
   Future<void> create(String databaseId, String collectionId,
       {CosmosRequestOptions? options}) {
+    var partitionKeys = options?.partitionKeys ?? ['/id'];
     return _client.post(
       'dbs/$databaseId/colls',
-      {'id': collectionId},
+      {
+        'id': collectionId,
+        'partitionKey': {
+          'paths': partitionKeys,
+          'kind': 'Hash',
+        }
+      },
       resourceType: ResourceType.container,
       removeLastPart: true,
       headers: options?.toHeaders() ?? const {},

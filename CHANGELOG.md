@@ -1,3 +1,8 @@
+## [0.0.4] - 2021-07-27
+* Use mandatory partitionKeys on collection creation and document operations
+* Fix bugs regarding the tests
+* Fix JsonUnsupportedObjectError while trying to encode JSON
+
 ## [0.0.3-prerelease] - 2021-03-24
 * Move internal files to src folder
 * Add complete flutter web support

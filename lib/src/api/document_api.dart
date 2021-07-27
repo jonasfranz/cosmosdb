@@ -56,23 +56,25 @@ class DocumentApi {
   Future<Map<String, dynamic>> replace(Map<String, dynamic> newDocument,
       String databaseId, String collectionId, String documentId,
       {CosmosRequestOptions? options}) {
+    options ??= CosmosRequestOptions(partitionKeys: [documentId]);
     return _client.put(
       'dbs/$databaseId/colls/$collectionId/docs/$documentId',
       newDocument,
       resourceType: ResourceType.item,
       removeLastPart: false,
-      headers: options?.toHeaders() ?? const {},
+      headers: options.toHeaders(),
     );
   }
 
   /// Deletes the document with the given id in the collection
   Future<void> delete(String databaseId, String collectionId, String documentId,
       {CosmosRequestOptions? options}) async {
+    options ??= CosmosRequestOptions(partitionKeys: [documentId]);
     await _client.delete(
       'dbs/$databaseId/colls/$collectionId/docs/$documentId',
       resourceType: ResourceType.item,
       removeLastPart: false,
-      headers: options?.toHeaders() ?? const {},
+      headers: options.toHeaders(),
     );
   }
 
@@ -80,11 +82,12 @@ class DocumentApi {
   Future<Map<String, dynamic>> findById(
       String databaseId, String collectionId, String documentId,
       {CosmosRequestOptions? options}) async {
+    options ??= CosmosRequestOptions(partitionKeys: [documentId]);
     return await _client.get(
       'dbs/$databaseId/colls/$collectionId/docs/$documentId',
       resourceType: ResourceType.item,
       removeLastPart: false,
-      headers: options?.toHeaders() ?? const {},
+      headers: options.toHeaders(),
     );
   }
 
@@ -99,12 +102,13 @@ class DocumentApi {
     if (!document.containsKey('id')) {
       throw ArgumentError('id in document is required');
     }
+    options ??= CosmosRequestOptions(partitionKeys: [document['id']]);
     return await _client.post(
       'dbs/$databaseId/colls/$collectionId/docs',
       document,
       removeLastPart: true,
       resourceType: ResourceType.item,
-      headers: options?.toHeaders() ?? {},
+      headers: options.toHeaders(),
     );
   }
 }

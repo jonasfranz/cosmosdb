@@ -29,12 +29,13 @@ String generateId() {
 
 CosmosDB buildClient() {
   final client = HttpClient();
-  if (TestConfig.ignoreSelfSignedCertificates) {
+  final config = TestConfig();
+  if (config.ignoreSelfSignedCertificates) {
     client.badCertificateCallback = (_, __, ___) => true;
   }
   return CosmosDB(
-    masterKey: TestConfig.cosmosDBMasterKey,
-    baseUrl: TestConfig.cosmosDBUrl,
+    masterKey: config.cosmosDBMasterKey,
+    baseUrl: config.cosmosDBUrl,
     httpClient: IOClient(client),
   );
 }

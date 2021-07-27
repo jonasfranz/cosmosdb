@@ -12,15 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-class TestConfig {
-  const TestConfig._();
+import 'package:universal_io/io.dart';
 
-  static const cosmosDBUrl = String.fromEnvironment('COSMOS_DB_URL',
-      defaultValue: 'https://localhost:8081/');
-  static const cosmosDBMasterKey = String.fromEnvironment(
-      'COSMOS_DB_MASTER_KEY',
-      defaultValue:
-          'C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==');
-  static const ignoreSelfSignedCertificates =
-      bool.fromEnvironment('COSMOS_DB_IGNORE_SSL', defaultValue: true);
+class TestConfig {
+  late final String cosmosDBUrl;
+  late final String cosmosDBMasterKey;
+  late final bool ignoreSelfSignedCertificates;
+
+  TestConfig() {
+    cosmosDBUrl =
+        Platform.environment['COSMOS_DB_URL'] ?? 'https://localhost:8081/';
+    cosmosDBMasterKey = Platform.environment['COSMOS_DB_MASTER_KEY'] ??
+        'C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==';
+    ignoreSelfSignedCertificates =
+        Platform.environment['COSMOS_DB_IGNORE_SSL'] != null;
+  }
 }

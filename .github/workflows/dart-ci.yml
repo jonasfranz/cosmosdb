@@ -31,6 +31,6 @@ jobs:
           dart test --coverage="coverage"
           format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.packages --report-on=lib
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
